@@ -1,0 +1,939 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Working with NumPy Arrays &#8212; MolSSI Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04-tabular-numpy';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Processing Multiple Files and Writing Files" href="03-multiple-file.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-python-introduction.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-file-parsing.html">File Parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-multiple-file.html">Processing Multiple Files and Writing Files</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with NumPy Arrays</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04-tabular-numpy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Working with NumPy Arrays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-text-from-files">Reading text from files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-of-numpy-arrays">Features of NumPy Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-data-in-the-array">Manipulating Data in the Array</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">Slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-tabular-data">Analyzing Tabular Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-array-axes-and-operations">NumPy Array Axes and Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-operations">Element-Wise Operations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="working-with-numpy-arrays">
+<h1>Working with NumPy Arrays<a class="headerlink" href="#working-with-numpy-arrays" title="Permalink to this headline">#</a></h1>
+<div class="overview admonition">
+<p class="admonition-title">Overview</p>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>How do I use NumPy arrays?</p></li>
+</ul>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Use functions in <code class="docutils literal notranslate"><span class="pre">numpy</span></code> to read in tabular data from comma separated value files.</p></li>
+<li><p>Access information in a numpy array using column names and row numbers.</p></li>
+<li><p>Learn about array axes.</p></li>
+</ul>
+</div>
+<p>NumPy, short for Numerical Python, is a powerful library that provides support for working with large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these data structures. It is widely used in scientific computing, data analysis, and machine learning for tasks that require numerical computations on large data sets.</p>
+<p>In this module we will focus on reading in and analyzing numerical data, visualizing the data, and working with arrays.</p>
+<section id="reading-text-from-files">
+<h2>Reading text from files<a class="headerlink" href="#reading-text-from-files" title="Permalink to this headline">#</a></h2>
+<p>As we already discussed, there are many ways to read in data from files in Python.
+In our last module, we used the readlines() function to read in a complex output file.
+In theory, you could always use the readlines() function, and then use the data parsing tools we learned in the previous module to format the data as you needed.
+But sometimes there are other ways that make more sense, particularly if the data is formatted in a table.</p>
+<p>A common table format is the <code class="docutils literal notranslate"><span class="pre">CSV</span></code> file or <code class="docutils literal notranslate"><span class="pre">comma</span> <span class="pre">separated</span> <span class="pre">values</span></code>.
+This is exactly what it sounds like.
+Data is presented in rows, with each value separated by a comma.
+If you have data in a spreadsheet program that you need to import into a python code, you can save the data as a csvfile to read it in.</p>
+<p>In this lesson, we are going to read in the data using a library called NumPy.
+NumPy has a data type called an <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
+<p>In this example, we have a CSV file that contains data from analysis of a molecular dynamics trajectory.
+We have a 20 ns simulation that used a 2 fs timestep.
+The data was saved to the trajectory file every 1000 steps, so our file has 10,000 timesteps.
+At each timestep, we are interested in the distance between particular atoms.
+These trajectories were generated with the AMBER molecular dynamics program and the distances were measured with the Python program MDAnalysis.
+The table of atomic distances was saved as a CSV file called “distance_data_headers.csv”.
+This file was downloaded as part of your lesson materials.
+Open the file in a text editor and study it to determine its structure.</p>
+<p>In analyzing tabular data, we often need to perform the same types of calculations (averaging, calculating the minimum or maximum of the data set), so we are once again going to use a Python library, this time a library that contains lots of functions to work with numerical data.</p>
+<p>The first thing we will do is import the NumPy library. When NumPy is imported, it is often shortened to <code class="docutils literal notranslate"><span class="pre">np</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function we will use is called <code class="docutils literal notranslate"><span class="pre">np.genfromtxt</span></code>.
+NumPy has a <a class="reference external" href="https://numpy.org/doc/stable/user/how-to-io.html">page on reading data from files</a> in its documentation.
+In the Jupyter environment, you can find out more about this function by doing</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Library Documentation</p>
+<p>Most popular Python libraries have very good online documentation.
+You can find the pandas documentation by googling “numpy docs”.
+You will be able to find the same help message you get for <code class="docutils literal notranslate"><span class="pre">genfromtxt</span></code> as well as tutorials and other types of documentation.</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/index.html">NumPy Documentation</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/devdocs/user/how-to-io.html">Reading and writing files using NumPy</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.genfromtxt.html"><code class="docutils literal notranslate"><span class="pre">genfromtxt</span></code> documentation</a></p></li>
+</ol>
+</div>
+<p>The help output shows us all the options we can use with this function.
+The first input <code class="docutils literal notranslate"><span class="pre">fname</span></code> is the filename we are reading in.
+We must put a values for this option because it does not have a default value.
+All the other options have a default value that is shown after the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign.
+We only need to specify these options if we don’t want to use the default value.
+For example, in our file, all the values were not numbers so we don’t want to use the datatype float, we want to use something else. If you have mixed datatypes, like we do here, we want to use ‘unicode’. In our file, our values are separated by commas; we indicate that with <code class="docutils literal notranslate"><span class="pre">delimiter=','</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Should you skip the headers?</p>
+<p>The clever student may notice the <code class="docutils literal notranslate"><span class="pre">skip_header</span></code> option, where you can specify a number of lines to skip at the beginning of the file. If we did this, then our values would all be numbers and we could use dtype=’float’, which is the default. In this example, we are not going to do that because we might want to use the headers later to label things, but keep this option in mind because you might want to use it in a later project.</p>
+</div>
+<p>To get started, we will make a variable for our file path, then use that variable in the <code class="docutils literal notranslate"><span class="pre">np.genfromtxt</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance_file</span> <span class="o">=</span> <span class="s2">&quot;data/distance_data_headers.csv&quot;</span>
+
+<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">distance_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The variable called <code class="docutils literal notranslate"><span class="pre">distances</span></code> is a <code class="docutils literal notranslate"><span class="pre">NumPy</span> <span class="pre">Array</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&#39;Frame&#39;, &#39;THR4_ATP&#39;, &#39;THR4_ASP&#39;, &#39;TYR6_ATP&#39;, &#39;TYR6_ASP&#39;],
+       [&#39;1&#39;, &#39;8.9542&#39;, &#39;5.8024&#39;, &#39;11.5478&#39;, &#39;9.9557&#39;],
+       [&#39;2&#39;, &#39;8.6181&#39;, &#39;6.0942&#39;, &#39;13.9594&#39;, &#39;11.6945&#39;],
+       ...,
+       [&#39;9998&#39;, &#39;8.6625&#39;, &#39;7.7306&#39;, &#39;9.5469&#39;, &#39;10.3063&#39;],
+       [&#39;9999&#39;, &#39;9.2456&#39;, &#39;7.8886&#39;, &#39;9.8151&#39;, &#39;10.7564&#39;],
+       [&#39;10000&#39;, &#39;8.8135&#39;, &#39;7.917&#39;, &#39;9.9517&#39;, &#39;10.7848&#39;]], dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output of this function resembles a list of lists; that is, each row is a entry in our list, but each row is itself a list of values. We can see that the first row is our column headings and all the other rows contain numerical data.</p>
+<p>If we were to read this in with the readlines() function, we would have to split each line of the file, use the append function to make a new list for each row, and THEN put all those lists together into a list of lists. Using the appropriate numpy function makes our life much easier.</p>
+</section>
+<section id="features-of-numpy-arrays">
+<h2>Features of NumPy Arrays<a class="headerlink" href="#features-of-numpy-arrays" title="Permalink to this headline">#</a></h2>
+<p>The variable distances <em>resembles</em> a lists of lists, but it is actually a data type called a NumPy array.
+In contrast to a list, a NumPy array can have multiple dimensions.
+In our case, it has rows and colums, or it has two dimensions.
+We can see this by using the <code class="docutils literal notranslate"><span class="pre">np.ndim</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also see the number of rows and columns in our array by using the <code class="docutils literal notranslate"><span class="pre">np.shape</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10001, 5)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="manipulating-data-in-the-array">
+<h2>Manipulating Data in the Array<a class="headerlink" href="#manipulating-data-in-the-array" title="Permalink to this headline">#</a></h2>
+<p>Even now, we can see that our first line of data is headings for our columns, and will need to be stored as strings, whereas all the rest of the data is numerical and will need to be stored as floats. Let’s take a slice of the data that is just the headers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Frame&#39; &#39;THR4_ATP&#39; &#39;THR4_ASP&#39; &#39;TYR6_ATP&#39; &#39;TYR6_ASP&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the same slicing syntax we learned in earlier lessons
+to get the numerical values in the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;1&#39; &#39;8.9542&#39; &#39;5.8024&#39; &#39;11.5478&#39; &#39;9.9557&#39;]
+ [&#39;2&#39; &#39;8.6181&#39; &#39;6.0942&#39; &#39;13.9594&#39; &#39;11.6945&#39;]
+ [&#39;3&#39; &#39;9.0066&#39; &#39;6.0637&#39; &#39;13.0924&#39; &#39;11.3043&#39;]
+ ...
+ [&#39;9998&#39; &#39;8.6625&#39; &#39;7.7306&#39; &#39;9.5469&#39; &#39;10.3063&#39;]
+ [&#39;9999&#39; &#39;9.2456&#39; &#39;7.8886&#39; &#39;9.8151&#39; &#39;10.7564&#39;]
+ [&#39;10000&#39; &#39;8.8135&#39; &#39;7.917&#39; &#39;9.9517&#39; &#39;10.7848&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though we now have a NumPy array that is just the numbers, the numbers are all still strings.
+We know this because (1) we read them all in as unicode and (2) if we look at the output of the print statement, we can see that each number is enclosed in single quotes, indicating that it is a string. We need to recast these values as floats.
+The numpy library has a built-in function to accomplish this. In this case, keeping a variable with all the same information as strings is not useful to us, so this is a case where we are going to overwrite our variable data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.00000e+00 8.95420e+00 5.80240e+00 1.15478e+01 9.95570e+00]
+ [2.00000e+00 8.61810e+00 6.09420e+00 1.39594e+01 1.16945e+01]
+ [3.00000e+00 9.00660e+00 6.06370e+00 1.30924e+01 1.13043e+01]
+ ...
+ [9.99800e+03 8.66250e+00 7.73060e+00 9.54690e+00 1.03063e+01]
+ [9.99900e+03 9.24560e+00 7.88860e+00 9.81510e+00 1.07564e+01]
+ [1.00000e+04 8.81350e+00 7.91700e+00 9.95170e+00 1.07848e+01]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We already learned how to address a particular element of a list and how to take a slice of a list to create a new list. Now that we have an array, we now need two indices to address a particular element of the array. The notation to address an element of the array is always</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">array_name</span><span class="p">[</span><span class="n">row_index</span><span class="p">,</span> <span class="n">column_index</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will get the first row and the second column.</span>
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.9542
+</pre></div>
+</div>
+</div>
+</div>
+<div class="exercise admonition">
+<p class="admonition-title">Check Your Understanding</p>
+<p>What would be the output of these lines of code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+</pre></div>
+</div>
+<div class="solution dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">8.9542</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="slicing">
+<h3>Slicing<a class="headerlink" href="#slicing" title="Permalink to this headline">#</a></h3>
+<p>Similar to lists, you can also slice numpy arrrays.
+This allows you to get a range of rows or columns.
+To take a slice, you use a colon:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">array_name</span><span class="p">[</span><span class="n">row_start</span><span class="p">:</span><span class="n">row_end</span><span class="p">,</span> <span class="n">column_start</span><span class="p">,</span> <span class="n">column_end</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">small_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.      8.9542  5.8024]
+ [ 2.      8.6181  6.0942]
+ [ 3.      9.0066  6.0637]
+ [ 4.      9.2002  6.0227]
+ [ 5.      9.1294  5.9365]
+ [ 6.      9.0462  6.2553]
+ [ 7.      8.8657  5.9186]
+ [ 8.      9.3256  6.2351]
+ [ 9.      9.4184  6.1993]
+ [10.      9.06    6.0478]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that counting starts at zero, so <code class="docutils literal notranslate"><span class="pre">0:10</span></code> means start at row zero and include all rows, up to but not including 10.
+Just as with the one-dimensional list slices, if you don’t include a number before the <code class="docutils literal notranslate"><span class="pre">:</span></code> the slice automatically starts with index 0. If you don’t include a number after the : the slice goes to the end of the array. Therefore, if you don’t include either, a <code class="docutils literal notranslate"><span class="pre">:</span></code> means every row or every column.</p>
+<div class="exercise admonition">
+<p class="admonition-title">Check Your Understanding</p>
+<p>What would be the output of these lines of code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">small_data</span><span class="p">[</span><span class="mi">5</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">small_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:])</span>
+
+</pre></div>
+</div>
+<div class="solution dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The first print statement selects one particular row and every column.</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">[6.     9.0462 6.2553]</span>
+</pre></div>
+</div>
+<p>The second print statement selects every row, and all the columns except the first one.</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">[[8.9542 5.8024]</span>
+<span class="go"> [8.6181 6.0942]</span>
+<span class="go"> [9.0066 6.0637]</span>
+<span class="go"> [9.2002 6.0227]</span>
+<span class="go"> [9.1294 5.9365]</span>
+<span class="go"> [9.0462 6.2553]</span>
+<span class="go"> [8.8657 5.9186]</span>
+<span class="go"> [9.3256 6.2351]</span>
+<span class="go"> [9.4184 6.1993]</span>
+<span class="go"> [9.06   6.0478]]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analyzing-tabular-data">
+<h2>Analyzing Tabular Data<a class="headerlink" href="#analyzing-tabular-data" title="Permalink to this headline">#</a></h2>
+<p>The numpy library has numerous built-in functions. For example, to calculate the average (mean) of a data set, we could use the <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1008.184506144
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us the mean of all the numbers in the array.
+Using what we have learned so far, we could use array slicing to
+determine the average of the first column of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thr4_atp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Every row, just the THR4_ATP column</span>
+<span class="n">avg_thr4_atp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thr4_atp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avg_thr4_atp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.876950930000001
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is correct, but now we would like to calculate the average of every column. This seems like a job <code class="docutils literal notranslate"><span class="pre">for</span></code> a for loop, but unlike last time, we don’t want to count over a particular list and do something for every item, we want to do something a particular number of times. Basically, we want to take that 1 and let it be every number, up to the number of columns. This is a task for the range() function. The general syntax is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In our example, the “end” value needs to be the number of columns of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we know the number of columns, we can use the range() function to set up our for loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_columns</span><span class="p">):</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">avg_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">F</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">headers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">avg_col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>THR4_ATP : 10.876950930000001
+THR4_ASP : 7.342344959999999
+TYR6_ATP : 11.209791329999998
+TYR6_ASP : 10.9934435
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="numpy-array-axes-and-operations">
+<h2>NumPy Array Axes and Operations<a class="headerlink" href="#numpy-array-axes-and-operations" title="Permalink to this headline">#</a></h2>
+<p>Although the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop we just used worked, there is an easier way to perform operations on NumPy arrays
+when you want to analyze rows or columns.</p>
+<p>NumPy arrays have axes for each dimension.
+For our array, we saw that it has two dimensions using <code class="docutils literal notranslate"><span class="pre">np.ndim</span></code>
+Axis 0 goes down the rows, while axis 1 goes across the columns.</p>
+<img alt="_images/numpy_array.svg" class="align-center" src="_images/numpy_array.svg" /><p>If we wanted to get the mean of every row, we could have added an <code class="docutils literal notranslate"><span class="pre">axis</span></code>
+argument to our <code class="docutils literal notranslate"><span class="pre">mean</span></code> function.
+To have the mean function applied to every column of data, we would use the <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5000.5          10.87695093    7.34234496   11.20979133   10.9934435 ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you compare the values calculated using this method and our <code class="docutils literal notranslate"><span class="pre">for</span></code>loop method,
+you will see that they are the same values.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">axis</span></code> keyword is usually the preferred method of analyzing NumPy arrays.
+If you have a lot of data, using the <code class="docutils literal notranslate"><span class="pre">axis</span></code> argument will be noticeably faster than using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop with an array.
+NumPy arrays have lots of other useful features that you can read about in <a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy’s beginner’s guide</a>.</p>
+<div class="exercise admonition">
+<p class="admonition-title">Check Your Understanding</p>
+<p>Use the function <code class="docutils literal notranslate"><span class="pre">np.std</span></code> and the appropriate axis argument to find the standard deviation of each column. How could you exclude the frame number column in your calculation?</p>
+<div class="solution dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>To find the standard deviation of each column, you can do</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you wanted to exclude the frame column, you could slide your array when performing the
+standard deviation calculation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="element-wise-operations">
+<h2>Element-Wise Operations<a class="headerlink" href="#element-wise-operations" title="Permalink to this headline">#</a></h2>
+<p>A NumPy array also allows element-wise operations, or easily adding two arrays.
+For example, if we wanted to add a number to every element of our array, we could easily do that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1"># I am adding the number two to every array element. Notice that I am not saving this in a variable, so data is unchanged.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.00000e+00, 1.09542e+01, 7.80240e+00, 1.35478e+01, 1.19557e+01],
+       [4.00000e+00, 1.06181e+01, 8.09420e+00, 1.59594e+01, 1.36945e+01],
+       [5.00000e+00, 1.10066e+01, 8.06370e+00, 1.50924e+01, 1.33043e+01],
+       ...,
+       [1.00000e+04, 1.06625e+01, 9.73060e+00, 1.15469e+01, 1.23063e+01],
+       [1.00010e+04, 1.12456e+01, 9.88860e+00, 1.18151e+01, 1.27564e+01],
+       [1.00020e+04, 1.08135e+01, 9.91700e+00, 1.19517e+01, 1.27848e+01]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is in contrast to the behavior of a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a lists of lists</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2, 3], [4, 5, 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">my_list</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="ne">TypeError</span>: can only concatenate list (not &quot;int&quot;) to list
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fortunately, you can make any list into an array using <code class="docutils literal notranslate"><span class="pre">np.array</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The data type of my_array is is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">my_array</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">my_array</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>NumPy arrays are powerful data structures that you will see often if you regularly program in Python for data analysis.
+We strongly encourage you to read the <a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy’s beginner’s guide</a>
+to learn more about NumPy arrays!</p>
+<div class="key admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>You can use NumPy to read data from files.</p></li>
+<li><p>NumPy arrays are multi-dimensional.</p></li>
+<li><p>NumPy has many functions for numerical analysis.</p></li>
+<li><p>You can use <code class="docutils literal notranslate"><span class="pre">range</span></code> in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to perform something a certain number of times.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code> loops can sometimes be avoided in NumPy by using special array features like the <code class="docutils literal notranslate"><span class="pre">axis</span></code> argument in analysis functions.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-multiple-file.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Processing Multiple Files and Writing Files</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-text-from-files">Reading text from files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-of-numpy-arrays">Features of NumPy Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-data-in-the-array">Manipulating Data in the Array</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">Slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-tabular-data">Analyzing Tabular Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-array-axes-and-operations">NumPy Array Axes and Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-operations">Element-Wise Operations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,907 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Plotting and Data Visualization &#8212; MolSSI Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05-plotting';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-python-introduction.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-file-parsing.html">File Parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-multiple-file.html">Processing Multiple Files and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tabular-numpy.html">Working with NumPy Arrays</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/05-plotting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plotting and Data Visualization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">Loading Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-with-x-and-y">Plotting with X and Y</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-at-regular-intervals">Slicing at regular intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labels-and-legends">Labels and Legends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-figures-and-image-resolution">Saving Figures and Image Resolution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-more-than-one-set-of-data">Plotting more than one set of data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-multiple-plots">Creating Multiple Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-appearance">Customizing Plot Appearance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-color-and-image-size">Changing Color and Image Size</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-and-data-visualization">
+<h1>Plotting and Data Visualization<a class="headerlink" href="#plotting-and-data-visualization" title="Permalink to this headline">#</a></h1>
+<div class="overview admonition">
+<p class="admonition-title">Overview</p>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>How do I visualize data by making graphs?</p></li>
+</ul>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Plot data to visualize results.</p></li>
+<li><p>Label plot axes and create a figure legend.</p></li>
+<li><p>Plot multiple graphs on one figure.</p></li>
+<li><p>Save figures to files.</p></li>
+</ul>
+</div>
+<p>Plotting is one of the most effective methods of representing numerical data and illustrating their patterns and trends.
+There are a number of applications that facilitate graph creation (Excel, Origin, SciDavis, etc.), but these methods can be time consuming, tedious, and at times inflexible. We have already seen the potential of coding for reading/editing/saving multiple files at once, as well as in creating tables from raw data in a ‘CSV’ file. Taking what we have learned so far, we will focus in this module on creating plots from the data in the previous lesson, customizing the plots with color, design, labels and legends, and using loops to create multiple figures at once.</p>
+<p>From the previous lesson, remember that you should have a variable called data defined which contains the tabular data in <code class="docutils literal notranslate"><span class="pre">distance_data_headers.csv</span></code>. We will need to load in this data again.</p>
+<section id="loading-data">
+<h2>Loading Data<a class="headerlink" href="#loading-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">distance_file</span> <span class="o">=</span> <span class="s2">&quot;data/distance_data_headers.csv&quot;</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">distance_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-data">
+<h2>Plotting Data<a class="headerlink" href="#plotting-data" title="Permalink to this headline">#</a></h2>
+<p>To graph our data, we will need a new python library that contains functions to plot data. To plot our data, we will use a Python library called matplotlib.
+The import we will use is <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pylot</span></code>.
+However, matplotlib.pyplot is a lot to type every time we make a plot.
+Often, when people import python modules they give them a shorthand name so that they have to type less. For example, <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> is commonly shortened to <code class="docutils literal notranslate"><span class="pre">plt</span></code>. You’ll see this in official documentation for matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A data set is plotted using the ‘plot()’ function of <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> (or of <code class="docutils literal notranslate"><span class="pre">plt</span></code>, since we shortened the name in our import).</p>
+<p>First, we use the <code class="docutils literal notranslate"><span class="pre">plt.figure</span></code> command to create a new figure,
+then we use <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> with arguments for what we want to plot.
+We will plot the first column of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf4c092670&gt;]
+</pre></div>
+</div>
+<img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
+</div>
+</div>
+</section>
+<section id="plotting-with-x-and-y">
+<h2>Plotting with X and Y<a class="headerlink" href="#plotting-with-x-and-y" title="Permalink to this headline">#</a></h2>
+<p>The data here are relatively straightforward, with the Frame column serving as a simple x value for the rest of the columns.
+Often however, it is necessary to show trends or patterns in data in relation to a variety of independent variables.
+If you have data that contains multiple x columns, it can be helpful to specify the x and y values we wish to use.
+In with ‘pyplot’, the first two parameters in the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function are <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> by default.</p>
+<p>Using both will result in a figure that is almost identical to what we saw before when we didn’t use <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf4c14c490&gt;]
+</pre></div>
+</div>
+<img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> must also be specified if we wanted to plot the data non-sequentially, say at regular intervals.
+To do this we will use a new slicing syntax.
+To select frames at regular intervals, we can use the syntax <code class="docutils literal notranslate"><span class="pre">array[start:stop:interval]</span></code>.</p>
+<section id="slicing-at-regular-intervals">
+<h3>Slicing at regular intervals<a class="headerlink" href="#slicing-at-regular-intervals" title="Permalink to this headline">#</a></h3>
+<p>Let’s start with viewing this slice in a table</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">:])</span>    <span class="c1"># to use the whole data set, simply leave out the stopping point integer, as before</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 8.9542  5.8024 11.5478  9.9557]
+ [ 9.0139  5.7436 13.9145 10.7853]
+ [11.506   8.9265 15.2785 12.0995]
+ [13.2053  7.6506 15.8632 12.0482]
+ [10.8274  7.6897 14.1698 12.2827]
+ [13.0953  7.6354 15.6024 12.567 ]
+ [15.1074  5.9674 14.8006  9.6562]
+ [14.6342  6.2847 14.4311  9.7521]
+ [14.0266  7.6997 12.956   9.7198]
+ [15.0463  6.7667 13.9174  9.3867]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is our new figure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf38c5fe80&gt;]
+</pre></div>
+</div>
+<img alt="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" src="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" />
+</div>
+</div>
+</section>
+<section id="labels-and-legends">
+<h3>Labels and Legends<a class="headerlink" href="#labels-and-legends" title="Permalink to this headline">#</a></h3>
+<p>To add labels and legends, add them to the initialized figure using functions belonging to <code class="docutils literal notranslate"><span class="pre">plt</span></code>.
+To add a label on the x-axis, we use <code class="docutils literal notranslate"><span class="pre">plt.xlabel</span></code>.
+To add a label on the y-axis, we use <code class="docutils literal notranslate"><span class="pre">plt.ylabel</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/253822b826f63d1d179d1445d844f7d05c1736105f98904388077f4d80bb1586.png" src="_images/253822b826f63d1d179d1445d844f7d05c1736105f98904388077f4d80bb1586.png" />
+</div>
+</div>
+<p>Finally, to add a legend, we add the <code class="docutils literal notranslate"><span class="pre">label</span></code> argument to our plot
+command, then use the command <code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code> to make sure the legend shows up.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf38ba77f0&gt;
+</pre></div>
+</div>
+<img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
+</div>
+</div>
+</section>
+<section id="saving-figures-and-image-resolution">
+<h3>Saving Figures and Image Resolution<a class="headerlink" href="#saving-figures-and-image-resolution" title="Permalink to this headline">#</a></h3>
+<p>If you’d like to save your plot as an image outside of this notebook, you can use the <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function.
+The argument to this function is a string that represents the path
+where you’d like to save the image.
+For example, we can save the image as a <code class="docutils literal notranslate"><span class="pre">png</span></code> in our current folder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
+</div>
+</div>
+<p>After executing this code, check the directory you are working in. You should have an image called <code class="docutils literal notranslate"><span class="pre">THR4_ATP.png</span></code> that looks like the one displayed above and in your notebook.</p>
+<p>Often, when you preparing images for your research, you will want to increase the image quality or resolution. This is easy to do with the savefig command we have been using. To increase the resolution your image is saved as, add the command <code class="docutils literal notranslate"><span class="pre">dpi=NUMBER</span></code> to the savefig command. dpi stands for “dots per inch”, and 300 is a resolution that is commonly used for publications.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
+</div>
+</div>
+<p>Matplotlib can also save vector images like <code class="docutils literal notranslate"><span class="pre">pdf</span></code> or <code class="docutils literal notranslate"><span class="pre">svg</span></code>.
+To save as an <code class="docutils literal notranslate"><span class="pre">svg</span></code>, you simply change the extension of your image file name in the <code class="docutils literal notranslate"><span class="pre">savefig</span></code> command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.svg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="plotting-more-than-one-set-of-data">
+<h2>Plotting more than one set of data<a class="headerlink" href="#plotting-more-than-one-set-of-data" title="Permalink to this headline">#</a></h2>
+<p>Adding additional data sets to the same plot can be done with a NumPy array by providing multiple y values through slicing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf388d7460&gt;
+</pre></div>
+</div>
+<img alt="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" src="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" />
+</div>
+</div>
+</section>
+<section id="creating-multiple-plots">
+<h2>Creating Multiple Plots<a class="headerlink" href="#creating-multiple-plots" title="Permalink to this headline">#</a></h2>
+<p>Alternatively, you might wish to create a plot for each data set.
+One way this can be accomplished is by using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.
+You might also choose to use subplots in matplotlib, but that is
+beyond the scope of this introductory lesson.
+To read more about subplots, you can see our <a class="reference external" href="https://education.molssi.org/python-visualization/matplotlib/subplots.html">Python Visualization Workshop lesson</a>.</p>
+<p>To create this plot, we will use the <code class="docutils literal notranslate"><span class="pre">range</span></code> for loop that we saw in the previous lesson.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="c1"># loop through the list of headers, creating a new figure with each cycle</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
+<img alt="_images/1f0f06150c89d8ee0ab9d0b3f81f33bfca2e7e19267bca155835d5c4ca380c7c.png" src="_images/1f0f06150c89d8ee0ab9d0b3f81f33bfca2e7e19267bca155835d5c4ca380c7c.png" />
+<img alt="_images/bbb656322b7c7185b24104997f28e8be6c8dfa5464527a9657d0f9587fa6b487.png" src="_images/bbb656322b7c7185b24104997f28e8be6c8dfa5464527a9657d0f9587fa6b487.png" />
+<img alt="_images/61dc4bd5a7bce08cab9b42ef550a6fd0ca575f1a278801037cf238cad073956b.png" src="_images/61dc4bd5a7bce08cab9b42ef550a6fd0ca575f1a278801037cf238cad073956b.png" />
+</div>
+</div>
+<p>For the plots showing our data so far, the y axis limits have all been different. Since these data sets are related, you may want to have all of the plots show the same axis ranges. We can manually set the y axis range of an axis for a plot using the command <code class="docutils literal notranslate"><span class="pre">plt.ylim(low_limit,</span> <span class="pre">high_limit)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="c1"># loop through the list of headers, creating a new figure with each cycle</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/619d9975ec40bb3c263c95ca9ff75b2830804af2b4d5cb5703cf9dbe40fb32ff.png" src="_images/619d9975ec40bb3c263c95ca9ff75b2830804af2b4d5cb5703cf9dbe40fb32ff.png" />
+<img alt="_images/222c8c067748ae32752f5337d5733ac8cdd33f2c15e7c12769041ca1d3b72588.png" src="_images/222c8c067748ae32752f5337d5733ac8cdd33f2c15e7c12769041ca1d3b72588.png" />
+<img alt="_images/8a3794d01fac696fd7057bffbf54655f4d9c710780c07e89e7b150e896e26a9e.png" src="_images/8a3794d01fac696fd7057bffbf54655f4d9c710780c07e89e7b150e896e26a9e.png" />
+<img alt="_images/0d457f451cd1da157e8b89631f4dba964ccbe591e82429243fe112457a5f87d3.png" src="_images/0d457f451cd1da157e8b89631f4dba964ccbe591e82429243fe112457a5f87d3.png" />
+</div>
+</div>
+</section>
+<section id="customizing-plot-appearance">
+<h2>Customizing Plot Appearance<a class="headerlink" href="#customizing-plot-appearance" title="Permalink to this headline">#</a></h2>
+<p>There are a variety of short strings that can be passed to the plot funtion convert the default line graph into a dashed line, scatter plot with various markers etc.</p>
+<p>For example, we could add round markers to our plot by putting in the argument <code class="docutils literal notranslate"><span class="pre">marker=&quot;o&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+<span class="n">fig_1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
+                 <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> 
+                 <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf38382550&gt;
+</pre></div>
+</div>
+<img alt="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" src="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" />
+</div>
+</div>
+<p>Here is a list of options you can use.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>character</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'-'</span></code></p></td>
+<td><p>solid line style</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'--'</span></code></p></td>
+<td><p>dashed line style</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'-.'</span></code></p></td>
+<td><p>dash-dot line style</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">':'</span></code></p></td>
+<td><p>dotted line style</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'.'</span></code></p></td>
+<td><p>point marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">','</span></code></p></td>
+<td><p>pixel marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'o'</span></code></p></td>
+<td><p>circle marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'v'</span></code></p></td>
+<td><p>triangle_down marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'^'</span></code></p></td>
+<td><p>triangle_up marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'&lt;'</span></code></p></td>
+<td><p>triangle_left marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'&gt;'</span></code></p></td>
+<td><p>triangle_right marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'1'</span></code></p></td>
+<td><p>tri_down marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'2'</span></code></p></td>
+<td><p>tri_up marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'3'</span></code></p></td>
+<td><p>tri_left marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'4'</span></code></p></td>
+<td><p>tri_right marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'s'</span></code></p></td>
+<td><p>square marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'p'</span></code></p></td>
+<td><p>pentagon marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'*'</span></code></p></td>
+<td><p>star marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'h'</span></code></p></td>
+<td><p>hexagon1 marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'H'</span></code></p></td>
+<td><p>hexagon2 marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'+'</span></code></p></td>
+<td><p>plus marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'x'</span></code></p></td>
+<td><p>x marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'D'</span></code></p></td>
+<td><p>diamond marker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'d'</span></code></p></td>
+<td><p>thin_diamond marker</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'_'</span></code></p></td>
+<td><p>hline marker</p></td>
+</tr>
+</tbody>
+</table>
+<section id="changing-color-and-image-size">
+<h3>Changing Color and Image Size<a class="headerlink" href="#changing-color-and-image-size" title="Permalink to this headline">#</a></h3>
+<p>You can also specify the figure size by adding another argment to <code class="docutils literal notranslate"><span class="pre">plt.figure</span></code>, or set the color of your plotted line by adding a <code class="docutils literal notranslate"><span class="pre">color</span></code> argument to <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>    <span class="c1"># Set the figure size when you initialize the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance (</span><span class="se">\u212B</span><span class="s1">)&#39;</span><span class="p">)</span>    <span class="c1"># Gettin&#39; fancy with unicode characters</span>
+
+<span class="c1"># set colors and linewidths in the plot funtion. separating parameters in lines for readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
+    <span class="n">data</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> 
+    <span class="s1">&#39;--s&#39;</span><span class="p">,</span> 
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ed1c24&#39;</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> 
+    <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;000000&#39;</span><span class="p">,</span>
+    <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf382ff2e0&gt;
+</pre></div>
+</div>
+<img alt="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" src="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" />
+</div>
+</div>
+<p>Plots using matplotlib are almost infinitely customizable.
+To learn more about creating plots, we recommend you check out <a class="reference external" href="https://education.molssi.org/python-visualization/chapters/setup.html">MolSSI’s visualization workshop</a> and read the <a class="reference external" href="https://matplotlib.org/stable/index.html">official matplotlib documentation</a>.</p>
+<div class="key admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>You can create plots in Python using matplotlib.pyplot and the plot command.</p></li>
+<li><p>Add labels, legends, color, and other stylistic choices to figures by passing parameters to plot</p></li>
+<li><p>Use the matplotlib.pyplot function ‘savefig()’ to save the figure to a file</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">Loading Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-with-x-and-y">Plotting with X and Y</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-at-regular-intervals">Slicing at regular intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labels-and-legends">Labels and Legends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-figures-and-image-resolution">Saving Figures and Image Resolution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-more-than-one-set-of-data">Plotting more than one set of data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-multiple-plots">Creating Multiple Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-appearance">Customizing Plot Appearance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-color-and-image-size">Changing Color and Image Size</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

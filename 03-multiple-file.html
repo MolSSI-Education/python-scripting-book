@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Processing Multiple Files and Writing Files &#8212; MolSSI Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03-multiple-file';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Working with NumPy Arrays" href="04-tabular-numpy.html" />
+    <link rel="prev" title="File Parsing" href="02-file-parsing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-python-introduction.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-file-parsing.html">File Parsing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Processing Multiple Files and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tabular-numpy.html">Working with NumPy Arrays</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03-multiple-file.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Processing Multiple Files and Writing Files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-to-a-file">Printing to a file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="processing-multiple-files-and-writing-files">
+<h1>Processing Multiple Files and Writing Files<a class="headerlink" href="#processing-multiple-files-and-writing-files" title="Permalink to this headline">#</a></h1>
+<div class="overview admonition">
+<p class="admonition-title">Overview</p>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>How do I analyze multiple files at once?</p></li>
+</ul>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Process multiple files using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p></li>
+<li><p>Print output to a new text file.</p></li>
+</ul>
+</div>
+<p>In our previous lesson, we parsed values from output files.
+While you might have seen the utility of doing such a thing, you might have also wondered why we didn’t just search the file and cut and paste the values we wanted into a spreadsheet.
+If you only have 1 or 2 files, this might be a very reasonable thing to do.
+But what if you had 100 files to analyze?
+What if you had 1000?
+In such a case the cutting and pasting method would be very tedious and time consuming.</p>
+<p>One of the real powers of writing a program to analyze your data is that you can just as easily analyze 100 files as 1 file. In this example, we are going to parse the output files for a whole series of aliphatic alcohol compounds and parse the energy value for each one. The output files are all saved in a folder called outfiles that you should have downloaded in the setup for this lesson. Make sure the folder is in the same directory as the directory where you are writing and executing your code.</p>
+<p>In this lesson, we will be using the <code class="docutils literal notranslate"><span class="pre">glob</span></code> library, which will help us read in multiple files from our computer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will make a file path which points to where our <code class="docutils literal notranslate"><span class="pre">.out</span></code> files are.
+For this file path, we will use <code class="docutils literal notranslate"><span class="pre">*</span></code> to specify any word (instead of something like ethanol).
+When we use this with the <code class="docutils literal notranslate"><span class="pre">glob</span></code> function in the <code class="docutils literal notranslate"><span class="pre">glob</span></code> library, we will get all of the files that matches that pattern</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_location</span> <span class="o">=</span> <span class="s2">&quot;data/outfiles/*.out&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data/outfiles/*.out
+</pre></div>
+</div>
+</div>
+</div>
+<p>This specifies that we want to look for all the files in a directory called data/outfiles that end in “.out”. The * is the wildcard character which matches any character.</p>
+<p>Next we are going to use a function called glob in the library called glob. It is a little confusing since the function and the library have the same name, but we will see other examples where this is not the case later. The output of the function glob is a list of all the filenames that fit the pattern specified in the input. The input is the file location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;data/outfiles/propanol.out&#39;, &#39;data/outfiles/hexanol.out&#39;, &#39;data/outfiles/decanol.out&#39;, &#39;data/outfiles/pentanol.out&#39;, &#39;data/outfiles/ethanol.out&#39;, &#39;data/outfiles/heptanol.out&#39;, &#39;data/outfiles/methanol.out&#39;, &#39;data/outfiles/nonanol.out&#39;, &#39;data/outfiles/butanol.out&#39;, &#39;data/outfiles/octanol.out&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This will give us a list of all the files which end in <code class="docutils literal notranslate"><span class="pre">*.out</span></code> in the outfiles directory. Now if we want to parse every file we just read in, we will use a for loop to go through each file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">outfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;Final Energy&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">energy_line</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">energy_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-193.12836249728798
+-310.2385332251633
+-466.3836241400086
+-271.20138119895074
+-154.09130176573018
+-349.27397687072676
+-115.04800861868374
+-427.3465180082815
+-232.1655798347283
+-388.3110864554743
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that in this code we actually used two for loops, one nested inside the other. The outer for loop counts over the filenames we read in earlier. The inner for loop counts over the line in each file, just as we did in our previous file parsing lesson.</p>
+<p>The output our code currently generates is not that useful. It doesn’t show us which file each energy value came from.</p>
+<p>We want to print the name of the molecule with the energy. We can use <code class="docutils literal notranslate"><span class="pre">os.path.basename</span></code>, which is another function in <code class="docutils literal notranslate"><span class="pre">os</span></code> to get just the name of the file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">first_file</span> <span class="o">=</span> <span class="n">filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_file</span><span class="p">)</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">first_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data/outfiles/propanol.out
+propanol.out
+</pre></div>
+</div>
+</div>
+</div>
+<div class="exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>How would you extract the molecule name from the example above?</p>
+<div class="solution dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">split</span></code> function introduced in the last lesson, and split at the <code class="docutils literal notranslate"><span class="pre">.</span></code> charactr.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">split_filename</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">molecule_name</span> <span class="o">=</span> <span class="n">split_filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molecule_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the solution from the previous exercise, we can modify our loop so that it prints the file name along with each energy value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+    <span class="c1"># Get the molecule name</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">split_filename</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">molecule_name</span> <span class="o">=</span> <span class="n">split_filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Read the data</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">outfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="c1"># Loop through the data</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;Final Energy&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">energy_line</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">energy_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">molecule_name</span><span class="p">,</span> <span class="n">energy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>propanol -193.12836249728798
+hexanol -310.2385332251633
+decanol -466.3836241400086
+pentanol -271.20138119895074
+ethanol -154.09130176573018
+heptanol -349.27397687072676
+methanol -115.04800861868374
+nonanol -427.3465180082815
+butanol -232.1655798347283
+octanol -388.3110864554743
+</pre></div>
+</div>
+</div>
+</div>
+<section id="printing-to-a-file">
+<h2>Printing to a file<a class="headerlink" href="#printing-to-a-file" title="Permalink to this headline">#</a></h2>
+<p>Finally, it might be useful to print our results in a new file, such that we could share our results with colleagues or or e-mail them to our advisor. Much like when we read in a file, the first step to writing output to a file is opening that file for writing. Opening a file for writing is similar to opening it for reading, except that you use <code class="docutils literal notranslate"><span class="pre">w</span></code> instead of <code class="docutils literal notranslate"><span class="pre">r</span></code> in the <code class="docutils literal notranslate"><span class="pre">open</span></code> function.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">a</span></code> for append to an existing file or <code class="docutils literal notranslate"><span class="pre">a+</span></code>. The <code class="docutils literal notranslate"><span class="pre">a</span></code> mode stands for <code class="docutils literal notranslate"><span class="pre">append</span></code>, and when you use this, lines will be added to the end of the file. If you use <code class="docutils literal notranslate"><span class="pre">w</span></code>, all existing file contents are overwritten if the file already exists.</p>
+<p>Python can only write strings to files. Our current print statement is not a string; it prints two python variables. To convert what we have now to a string, you place a capital F in front of the line you want to print and enclose it in single quotes. Each python variable is placed in braces. Then you can either print the line (as we have done before) or you can use the filehandle.write() command to print it to a file.</p>
+<p>To make the printing neater, we will separate the file name from the energy using a tab. To insert a tab, we use the special character \t.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;energies.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">datafile</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+        <span class="c1"># Get the molecule name</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">split_filename</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">molecule_name</span> <span class="o">=</span> <span class="n">split_filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Read the data</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">outfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="c1"># Loop through the data</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;Final Energy&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">energy_line</span> <span class="o">=</span> <span class="n">line</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="n">energy_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">datafile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">F</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">molecule_name</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">energy</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After you run this command, look in the directory where you ran your code and find the “energies.txt” file. Open it in a text editor and look at the file.</p>
+<p>In the file writing line, notice the \n at the end of the line. This is the newline character. Without it, the text in our file would just be all smushed together on one line.</p>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Extend your project from the previous lesson to analyze all of the <code class="docutils literal notranslate"><span class="pre">mdout</span></code> files in the folder <code class="docutils literal notranslate"><span class="pre">data/mdout</span></code>. Write a new file for each analyzed file called <code class="docutils literal notranslate"><span class="pre">filename_Etot.txt</span></code>.</p>
+<div class="solution dropdown admonition">
+<p class="admonition-title">Soluiton</p>
+<ul class="simple">
+<li><p>Solution here</p></li>
+</ul>
+</div>
+</div>
+<div class="key admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">glob</span></code> function in the <code class="docutils literal notranslate"><span class="pre">glob</span></code> library to get files that have similar names.</p></li>
+<li><p>You can nest <code class="docutils literal notranslate"><span class="pre">for</span></code> loops inside of each other (also called double for loop)</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-file-parsing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">File Parsing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04-tabular-numpy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working with NumPy Arrays</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-to-a-file">Printing to a file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
