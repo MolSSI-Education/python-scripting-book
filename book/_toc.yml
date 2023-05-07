@@ -1,0 +1,9 @@
+format: jb-article
+root: intro
+sections:
+- file: setup
+- file: 01-python-introduction
+- file: 02-file-parsing
+- file: 03-multiple-file
+- file: 04-tabular-numpy
+
