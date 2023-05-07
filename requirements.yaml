@@ -1,0 +1,14 @@
+name: python_scripting_cms
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - jupyter-book
+  - pandas
+  - numpy
+  - matplotlib
+  - jupyterlab
+  - notebook
+  - nodejs
