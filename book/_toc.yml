@@ -6,4 +6,5 @@ sections:
 - file: 02-file-parsing
 - file: 03-multiple-file
 - file: 04-tabular-numpy
+- file: 05-plotting
 
