@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '05-plotting';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Working with NumPy Arrays" href="04-tabular-numpy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -147,12 +148,13 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01-python-introduction.html">Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-file-parsing.html">File Parsing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-multiple-file.html">Processing Multiple Files and Writing Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-tabular-numpy.html">Working with NumPy Arrays</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting and Data Visualization</a></li>
 </ul>
 
     </div>
@@ -384,7 +386,7 @@ We will plot the first column of data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf4c092670&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f28703ac790&gt;]
 </pre></div>
 </div>
 <img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
@@ -406,7 +408,7 @@ In with ‘pyplot’, the first two parameters in the <code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf4c14c490&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f28807f7c10&gt;]
 </pre></div>
 </div>
 <img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
@@ -448,7 +450,7 @@ To select frames at regular intervals, we can use the syntax <code class="docuti
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcf38c5fe80&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f2870244f10&gt;]
 </pre></div>
 </div>
 <img alt="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" src="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" />
@@ -486,7 +488,7 @@ command, then use the command <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf38ba77f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f2870190880&gt;
 </pre></div>
 </div>
 <img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
@@ -569,7 +571,7 @@ To save as an <code class="docutils literal notranslate"><span class="pre">svg</
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf388d7460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f285cdcdbe0&gt;
 </pre></div>
 </div>
 <img alt="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" src="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" />
@@ -651,7 +653,7 @@ To read more about subplots, you can see our <a class="reference external" href=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf38382550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f285c8edd00&gt;
 </pre></div>
 </div>
 <img alt="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" src="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" />
@@ -768,7 +770,7 @@ To read more about subplots, you can see our <a class="reference external" href=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcf382ff2e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f285c86b9a0&gt;
 </pre></div>
 </div>
 <img alt="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" src="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" />
@@ -819,6 +821,15 @@ To learn more about creating plots, we recommend you check out <a class="referen
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="04-tabular-numpy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Working with NumPy Arrays</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
