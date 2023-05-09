@@ -302,9 +302,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-through-anaconda">Installing Python through Anaconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-lesson-materials">Obtain lesson materials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-jupyter-notebook">Start a Jupyter notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-jupyter-notebook-in-your-browser-academic-email-addresses-only">Accessing the Jupyter Notebook in your browser (academic email addresses only)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-files-for-lesson-on-chemcompute">Obtain Files for Lesson on ChemCompute</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-a-locally-installed-copy-of-the-jupyter-notebook">Accessing a locally installed copy of the Jupyter Notebook</a></li>
 </ul>
             </nav>
         </div>
@@ -318,23 +320,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="set-up">
 <h1>Set Up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h1>
-<section id="installing-python-through-anaconda">
-<h2>Installing Python through Anaconda<a class="headerlink" href="#installing-python-through-anaconda" title="Permalink to this headline">#</a></h2>
-<p><a class="reference external" href="https://python.org/">Python</a> is a popular language for scientific computing, and great for general-purpose programming as well. Installing all of its scientific packages individually can be a bit difficult, however, so we recommend the all-in-one installer Anaconda.</p>
-<ol class="arabic simple">
-<li><p>Navigate to the <a class="reference external" href="https://www.anaconda.com/products/individual">download page</a> for Anaconda.</p></li>
-<li><p>Download the appropriate installer for your operating system. <strong>Make sure you get the installer listed under Python 3</strong> (not 2.7).</p></li>
-<li><p>Double click the installer icon and follow the set-up instructions, keeping most of the default options. If you are Windows, make sure to choose to choose the option <strong>Make Anaconda the default Python</strong> during installation.</p></li>
-</ol>
+<p>In this workshop, we will introduce the Python programming language.
+<a class="reference external" href="https://python.org/">Python</a> is a popular language for scientific computing, and great for general-purpose programming as well.
+You will need to access the JupyterLab or Jupyter notebook.
+You may either install Python and the Jupyter notebook on your computer, or access a Python environment in your browser.
+If you are new to Python programming, we recommend trying it out in your browser on a platform such as chemcompute for this workshop.</p>
+<section id="accessing-the-jupyter-notebook-in-your-browser-academic-email-addresses-only">
+<h2>Accessing the Jupyter Notebook in your browser (academic email addresses only)<a class="headerlink" href="#accessing-the-jupyter-notebook-in-your-browser-academic-email-addresses-only" title="Permalink to this headline">#</a></h2>
+<p>You can access the Jupyter notebook using a browser through the website <a class="reference external" href="https://chemcompute.org/">ChemCompute</a>. Follow the instructions below to make a ChemCompute account and download the required data. Note that ChemCompute is available to academic users only.
+To create a ChemCompute Account  - Navigate to <a class="reference external" href="https://chemcompute.org/">https://chemcompute.org/</a> and create an account using an email address associated with your university. After creating your account, you will receive a verification email at the email address you provide during registration.
+Be sure to verify your email address. Next, follow the chemcompute instructions to obtain files you need for the workshop.</p>
+<section id="obtain-files-for-lesson-on-chemcompute">
+<h3>Obtain Files for Lesson on ChemCompute<a class="headerlink" href="#obtain-files-for-lesson-on-chemcompute" title="Permalink to this headline">#</a></h3>
+<p>After you have created your account and verified your email, make sure you are logged in. Then, select “Jupyter” in the top menu of chemcompute. Next, click “Clone a github repo to your notebook”</p>
+<a class="reference internal image-reference" href="_images/chemcompute1.png"><img alt="_images/chemcompute1.png" class="align-center" src="_images/chemcompute1.png" style="width: 100%;" /></a>
+<p>On the next page enter <code class="docutils literal notranslate"><span class="pre">https://github.com/MolSSI-Education/python-data-and-scripting</span></code> and click “Pull Repo”</p>
+<a class="reference internal image-reference" href="_images/chemcompute2.png"><img alt="_images/chemcompute2.png" class="align-center" src="_images/chemcompute2.png" style="width: 100%;" /></a>
 </section>
-<section id="obtain-lesson-materials">
-<h2>Obtain lesson materials<a class="headerlink" href="#obtain-lesson-materials" title="Permalink to this headline">#</a></h2>
 </section>
-<section id="start-a-jupyter-notebook">
-<h2>Start a Jupyter notebook<a class="headerlink" href="#start-a-jupyter-notebook" title="Permalink to this headline">#</a></h2>
-<p>From Finder or Spotlight (Mac OS) or the Start Menu (Windows) find the Anaconda Navigator.  The icon looks like a green circle.  Click Launch under Jupyter Notebook.  It may take a few seconds to load the page, especially if it is the first time you have ever used the jupyter notebook, so don’t panic if nothing loads for a few seconds.  Then a new window should open in your default internet browser. Use the file navigation window to navigate to <code class="docutils literal notranslate"><span class="pre">Desktop</span></code> and then to the <code class="docutils literal notranslate"><span class="pre">WORKSHOP_NAME</span></code> folder.  In the upper right hand corner, click New, then choose Python 3 from the dropdown list (shown below)</p>
-<img src="https://github.com/MolSSI-Education/python_scripting_cms/blob/gh-pages/fig/setup_fig1.png?raw=true" width="70%">
-<p>This will start a new Jupyter notebook using Python 3. You’re ready to go!</p>
+<section id="accessing-a-locally-installed-copy-of-the-jupyter-notebook">
+<h2>Accessing a locally installed copy of the Jupyter Notebook<a class="headerlink" href="#accessing-a-locally-installed-copy-of-the-jupyter-notebook" title="Permalink to this headline">#</a></h2>
+<p>If you plan to use Python and Juptyer notebook locally, we recommend downloading and installing <a class="reference external" href="https://www.anaconda.com/download">Anaconda</a>. Anaconda is a Python distribution that include the Jupyter notebook and many Python packages relevant for data science.</p>
+<p>Download and unzip <a class="reference download internal" download="" href="_downloads/b9a5a3fcd264671127a86eafea18b8ea/python-data-and-scripting.zip"><code class="xref download docutils literal notranslate"><span class="pre">the</span> <span class="pre">workshop</span> <span class="pre">material</span></code></a> onto a place you can easily find them on your computer.</p>
 </section>
 </section>
 
@@ -405,9 +412,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-through-anaconda">Installing Python through Anaconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-lesson-materials">Obtain lesson materials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-jupyter-notebook">Start a Jupyter notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-jupyter-notebook-in-your-browser-academic-email-addresses-only">Accessing the Jupyter Notebook in your browser (academic email addresses only)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-files-for-lesson-on-chemcompute">Obtain Files for Lesson on ChemCompute</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-a-locally-installed-copy-of-the-jupyter-notebook">Accessing a locally installed copy of the Jupyter Notebook</a></li>
 </ul>
   </nav></div>
 
