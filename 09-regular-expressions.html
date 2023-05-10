@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>File Parsing using Regular Expressions &#8212; MolSSI Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09-regular-expressions';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-python-introduction.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-file-parsing.html">File Parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-multiple-file.html">Processing Multiple Files and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tabular-numpy.html">Working with NumPy Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-plotting.html">Plotting and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-pandas.html">Data Analysis using pandas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/09-regular-expressions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>File Parsing using Regular Expressions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicing-regular-expressions-using-pythex">Practicing Regular Expressions using Pythex</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-matching">Basic Matching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complicated-matchng-using-metacharacters">More complicated matchng - using metacharacters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-digits-and-letters">Matching Digits and Letters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating-patterns">Repeating Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-hydrocarbons">Matching Hydrocarbons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-regular-expressoins-in-python">Using Regular Expressoins in Python</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="file-parsing-using-regular-expressions">
+<h1>File Parsing using Regular Expressions<a class="headerlink" href="#file-parsing-using-regular-expressions" title="Permalink to this headline">#</a></h1>
+<div class="overview admonition">
+<p class="admonition-title">Overview</p>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>How do I pull information from files when I need to match a certain pattern of text?</p></li>
+<li><p>What are regular expressions?</p></li>
+</ul>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Use regular expressions to pull chemical formulas from a text file.</p></li>
+</ul>
+</div>
+<p>In file parsing lesson, we learned how to parse files using open, readlines, then looping through the file to find specific phrases. This works fine for some cases, however, there are some times when this will either be slow or impossible.</p>
+<p>Sometimes, you will want to look for text which resembles a certain pattern.</p>
+<p>Regular expressions will allow us to define patterns of text we are looking for rather than hardcoding specific phrases.
+They are particularly useful when the text you are looking for follows a specific pattern, but can’t be defined using simple logic rules.</p>
+<p>A commonly used example is looking for phone numbers.
+Phone numbers all follow a specific pattern, but have different digits.
+If we thought of rules for a phone number, we might say that it should be 3 numbers (area code) followed by a dash, followed by three numbers, andother dash, then four numbers, to have the format XXX-XXX-XXXX. This would be difficult to look for using strategies we have learned so far.</p>
+<p>For this section, we will be parsing some text pulled from Wikipedia on chemical formulas.
+Our goal will be to extract all of the chemical formulas for hydrocarbons in the text.</p>
+<div class="exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Take a moment to think about what rules you would define for</p>
+<ol class="arabic simple">
+<li><p>A chemical formula.</p></li>
+<li><p>Chemical formulas for hydrocarbons.</p></li>
+</ol>
+</div>
+<section id="practicing-regular-expressions-using-pythex">
+<h2>Practicing Regular Expressions using Pythex<a class="headerlink" href="#practicing-regular-expressions-using-pythex" title="Permalink to this headline">#</a></h2>
+<p>We will be prototyping our regular expression on a website called <a class="reference external" href="https://pythex.org/">pythex</a>.
+Go to this website and paste in the text from the file <code class="docutils literal notranslate"><span class="pre">data/chemical_formula.txt</span></code>.</p>
+<section id="basic-matching">
+<h3>Basic Matching<a class="headerlink" href="#basic-matching" title="Permalink to this headline">#</a></h3>
+<p>At it’s simplest, regular expressions match the exact pattern yoou specify. For example, if we wanted to find all the places the word <code class="docutils literal notranslate"><span class="pre">formula</span></code> occurred in the text, we could do that by typing the word <code class="docutils literal notranslate"><span class="pre">formula</span></code> into our regular expression field.</p>
+</section>
+<section id="more-complicated-matchng-using-metacharacters">
+<h3>More complicated matchng - using metacharacters<a class="headerlink" href="#more-complicated-matchng-using-metacharacters" title="Permalink to this headline">#</a></h3>
+<p>This is not that interesting, but we can see that the word “chemical” is found eight times in the text.
+You’ll notice here that this text matches exactly, as in it is only showing us when the word energy (lowercase c) is found.
+This is where the power of regular expressions can come in.
+Let’s imagine that you want to look for either the word “chemical” or the word “Chemical”. You can modify your regular expression to use special characters to tell the regular expression that either letter is okay.</p>
+<p>To do matches other than matching for the literal character, you use special characters in your regular expressions (referred to as metacharacters). Here are some examples of metacharacters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>. ^ $ * + ? { } [ ] \ | ( )
+</pre></div>
+</div>
+<p>Each of these metacharacters has a different meaning and can be used to match different patterns.</p>
+<p>The first we will use is <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code>. For regular expressions, these indicate a class of characters you want to search for. For example, to look for f or F, we could use <code class="docutils literal notranslate"><span class="pre">[Ff]</span></code>.
+Try typing <code class="docutils literal notranslate"><span class="pre">[Cc]hemical</span></code> in the box “Your regular expression” on Pythex.</p>
+<p>Another usefule metacharacter is <code class="docutils literal notranslate"><span class="pre">.</span></code> which matches any character not including newline.</p>
+<p>For example, if we wanted to match any character for the first letter of “chemical”, we could have written <code class="docutils literal notranslate"><span class="pre">.hemical</span></code> instead of <code class="docutils literal notranslate"><span class="pre">[Cc]hemical</span></code>.</p>
+</section>
+<section id="matching-digits-and-letters">
+<h3>Matching Digits and Letters<a class="headerlink" href="#matching-digits-and-letters" title="Permalink to this headline">#</a></h3>
+<p>To match any lowercase letter, we can use <code class="docutils literal notranslate"><span class="pre">[a-z]</span></code>. Similarly, any uppercase letter is written <code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code>. Both of thse patterns will match a single uppercase or lowercase letter.</p>
+<p>To match any digit, we can use <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code>. You can also use the pattern <code class="docutils literal notranslate"><span class="pre">\d</span></code>.</p>
+</section>
+<section id="repeating-patterns">
+<h3>Repeating Patterns<a class="headerlink" href="#repeating-patterns" title="Permalink to this headline">#</a></h3>
+<p>You can also specify that a pattern repeats by following the pattern with metacharacters. The meta character <code class="docutils literal notranslate"><span class="pre">{N}</span></code> can be used to specify an exact number of repeats.</p>
+<p>If you want to an unspecified number of repeats, you can use <code class="docutils literal notranslate"><span class="pre">*</span></code> for any number of repeats including 0, or <code class="docutils literal notranslate"><span class="pre">+</span></code> for a pattern repeating one or more times. The <code class="docutils literal notranslate"><span class="pre">?</span></code> matches either 0 or 1 times.</p>
+</section>
+</section>
+<section id="matching-hydrocarbons">
+<h2>Matching Hydrocarbons<a class="headerlink" href="#matching-hydrocarbons" title="Permalink to this headline">#</a></h2>
+<p>Now that we know some basic rules of regular expressions, let’s try using what we have learned to find the chemical formulas for hydrocarbons in the text.</p>
+<p>To find hydrocarbons, we must first think about what rules define a hydrocarbon formula.
+To do this, you might think of how you would tell someone who is not a chemist to look for hydrocarbon formulas.
+After deciding this, we will translate the rules to regular expressions.</p>
+<ol class="arabic simple">
+<li><p>A hydrocarbon formula will be a word (surrounded by spaces) containing only letters and numbers.</p></li>
+<li><p>The letters will only be capital C’s and H’s.</p></li>
+<li><p>The C’s and H’s might be followed by numbers, as is the case for C2H6. However, they might not be followed by numbers (CH3).</p></li>
+<li><p>The formula could be a pattern of several CH groups together, (CH3CH2CH3)</p></li>
+</ol>
+<p>Using these rules, we might initially build the following regular expression:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span>\<span class="n">dH</span>\<span class="n">d</span>
+</pre></div>
+</div>
+<p>This says “capital C, followed by a digit, followed by an H, followed by a digit”</p>
+<p>Next, we will add in an expression for the phrase ” However, they might not be followed by numbers (CH3).”</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span>\<span class="n">d</span><span class="o">*</span><span class="n">H</span>\<span class="n">d</span><span class="o">*</span>
+</pre></div>
+</div>
+<p>Add in parenthesis around your regular expression to group the phrase.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">C</span>\<span class="n">d</span><span class="o">*</span><span class="n">H</span>\<span class="n">d</span><span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In Pythex, you should now see a list of matches on the side.
+Notably, you will see that the formula “CH3CH2CH2CH2CH2CH3” is several matches instead of one formula.
+We can add a plus following this pattern to indicate that it can repeate one or more times, then get the full match by adding another group of parenthesis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="n">C</span>\<span class="n">d</span><span class="o">*</span><span class="n">H</span>\<span class="n">d</span><span class="o">*</span><span class="p">)</span><span class="o">+</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The use of parenthesis creates a <code class="docutils literal notranslate"><span class="pre">group</span></code> in regular expressions, and groups will also define what is returned to us for a match.
+If we don’t want the hydrocarbon subunit returned, we can make it into a “non-capturing” group by adding <code class="docutils literal notranslate"><span class="pre">?:</span></code> at the beginning of the group.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>((?:C\d*H\d*)+)
+</pre></div>
+</div>
+<p>Finally, we will want to make sure we are not getting chemical formulas that contain other elements.
+We could ensure this by adding spaces or punctuation around our pattern. For our example, they are followed by a space or a comma, so we could write the following at the end of our regular expression</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>\<span class="n">s</span><span class="p">,]</span>
+</pre></div>
+</div>
+<p>Making our full regular expression:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>((?:C\d*H\d*)+)[\s,]
+</pre></div>
+</div>
+</section>
+<section id="using-regular-expressoins-in-python">
+<h2>Using Regular Expressoins in Python<a class="headerlink" href="#using-regular-expressoins-in-python" title="Permalink to this headline">#</a></h2>
+<p>You can use regular expressions using the <code class="docutils literal notranslate"><span class="pre">re</span></code> module in Python.
+The following code block demonstrates using Python and the regular expression we’ve built to pull matches using Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/chemical_formula.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;((?:C\d*H\d*)+)[\s,]&quot;</span><span class="p">)</span>
+
+<span class="n">matches</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;C6H14&#39;, &#39;CH3CH2CH2CH2CH2CH3&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can read more about Python regular expressions in the <a class="reference external" href="https://docs.python.org/3/howto/regex.html">Python Regular Expressoin HOWTO</a> and in the <a class="reference external" href="https://docs.python.org/3/library/re.html">Python documentation</a> for the <code class="docutils literal notranslate"><span class="pre">re</span></code> module.</p>
+<div class="exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Use what you’ve learned about regular expressions to pull data from <a class="reference external" href="https://raw.githubusercontent.com/doylelab/rxnpredict/master/spartan_molecules/1-bromo-4-(trifluoromethyl)benzene.spardir/M0001/output">this Spartan file</a>.</p>
+<p>Try to:</p>
+<ol class="arabic simple">
+<li><p>Pull out data matching the pattern “data : value”</p></li>
+<li><p>Pull out tables.</p></li>
+</ol>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicing-regular-expressions-using-pythex">Practicing Regular Expressions using Pythex</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-matching">Basic Matching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complicated-matchng-using-metacharacters">More complicated matchng - using metacharacters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-digits-and-letters">Matching Digits and Letters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating-patterns">Repeating Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-hydrocarbons">Matching Hydrocarbons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-regular-expressoins-in-python">Using Regular Expressoins in Python</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
