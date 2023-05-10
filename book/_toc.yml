@@ -7,4 +7,5 @@ sections:
 - file: 03-multiple-file
 - file: 04-tabular-numpy
 - file: 05-plotting
+- file: 08-pandas
 
