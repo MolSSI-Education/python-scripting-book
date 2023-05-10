@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '05-plotting';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Analysis using pandas" href="08-pandas.html" />
     <link rel="prev" title="Working with NumPy Arrays" href="04-tabular-numpy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -155,6 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="03-multiple-file.html">Processing Multiple Files and Writing Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-tabular-numpy.html">Working with NumPy Arrays</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-pandas.html">Data Analysis using pandas</a></li>
 </ul>
 
     </div>
@@ -386,7 +388,7 @@ We will plot the first column of data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdac43517f0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7cdc6577f0&gt;]
 </pre></div>
 </div>
 <img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
@@ -408,7 +410,7 @@ In with ‘pyplot’, the first two parameters in the <code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdac40e6be0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7cdc256b20&gt;]
 </pre></div>
 </div>
 <img alt="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" src="_images/ec1cc2ce604c0a59c7a12e3f816812cce2b28c419f5baff83fdbbe1b6de958d7.png" />
@@ -450,7 +452,7 @@ To select frames at regular intervals, we can use the syntax <code class="docuti
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdac41fa130&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7cdc4f7670&gt;]
 </pre></div>
 </div>
 <img alt="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" src="_images/b1f56c96d52b319157e8360cd9d929d656d69f53625a9021c3f3ffa72e791247.png" />
@@ -488,7 +490,7 @@ command, then use the command <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdac4138970&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7cdc4406d0&gt;
 </pre></div>
 </div>
 <img alt="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" src="_images/17a568b8bf7b6de68e86b2fc75abb952f950e28b356e6a53bbc53ee209d5b9fe.png" />
@@ -571,7 +573,7 @@ To save as an <code class="docutils literal notranslate"><span class="pre">svg</
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdab0d8bc40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7cdc067a90&gt;
 </pre></div>
 </div>
 <img alt="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" src="_images/09fcf6bc4737adfd99c8dcbe6dc156a0f4456dc3fd48e9538e2ed15a45dba39f.png" />
@@ -653,7 +655,7 @@ To read more about subplots, you can see our <a class="reference external" href=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdab097fd90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7cc88ddca0&gt;
 </pre></div>
 </div>
 <img alt="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" src="_images/7d920667b85d1f9df615d288a67774ea3ccfd087536a6a31ffb3bc515e0a8ab4.png" />
@@ -770,7 +772,7 @@ To read more about subplots, you can see our <a class="reference external" href=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdab09421f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7cc8914af0&gt;
 </pre></div>
 </div>
 <img alt="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" src="_images/665b190d640d6f6f7b1ba1083885a25e6a8c4e8222810f6b7a3a05648372a60f.png" />
@@ -829,6 +831,15 @@ To learn more about creating plots, we recommend you check out <a class="referen
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Working with NumPy Arrays</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="08-pandas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Analysis using pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
