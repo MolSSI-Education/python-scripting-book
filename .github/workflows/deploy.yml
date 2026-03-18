@@ -23,12 +23,13 @@ jobs:
         ulimit -a
 
 
-    # More info on options: https://github.com/conda-incubator/setup-miniconda
-    - name: Install Conda environment with Micromamba
-      uses: mamba-org/provision-with-micromamba@main
+    - name: Set up micromamba
+      uses: mamba-org/setup-micromamba@v2
       with:
-          environment-file: requirements.yaml
-          environment-name: python_scripting_cms
+        environment-file: requirements.yaml
+        environment-name: python_scripting_cms
+        init-shell: bash
+        cache-environment: true
 
 
     # Build the book
